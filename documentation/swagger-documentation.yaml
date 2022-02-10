@@ -1,0 +1,221 @@
+swagger: "2.0"
+info:
+  description: "Esta aplicación tiene como principal caracterisca la traducción de los modelos de StarWars API de cualquier endpoint del ingles al español y la gestión de empleados (CRUD) utilizando la base de datos DynamoDB"
+  version: "1.0.0"
+  title: "Reto Indra Nodejs AWS"
+host: "aws.serverless.endpoint"
+basePath: "/dev/"
+tags:
+- name: "translate"
+  description: "Servicios para traducir el modelo del endpoint de StarWars API"
+- name: "employe"
+  description: "Gestión de empleados con la DynamoDB"
+paths:
+  /translate/endpoint:
+    post:
+      tags:
+      - "translate"
+      summary: "Traducir modelos de StarWars API"
+      operationId: "translateModel"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/TranslateBody"
+      responses:
+        "200":
+          schema:
+            $ref: "#/definitions/TranslateResponse"
+          description: "Traducción correcta"
+        "400":
+          description: "Error translate service"
+  /employe/insert:
+    post:
+      tags:
+      - "employe"
+      summary: "Registrar un nuevo empleado"
+      operationId: "employeInsert"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/EmployeInsertBody"
+      responses:
+        "200":
+          description: "Employe was add successfully"
+        "400":
+          description: "Error insert employe"
+  /employe/update:
+    put:
+      tags:
+      - "employe"
+      summary: "Actualiza los datos de un empleado existente"
+      operationId: "employeUpdate"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/EmployeInsertBody"
+      responses:
+        "200":
+          description: "Employe was update successfully"
+        "400":
+          description: "Error update employe"
+  /employe/list:
+    get:
+      tags:
+      - "employe"
+      summary: "Recuperar todos los empleados registrados"
+      operationId: "employeList"
+      responses:
+        "200":
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EmployeListResponse"
+          description: "Lista de empleados registrados"
+        "400":
+          description: "Error list employe"
+  /employe/get:
+    get:
+      tags:
+      - "employe"
+      summary: "Recuperar un empleado mediante el id y su nombre"
+      operationId: "employeGet"
+      parameters:
+      - name: "employeId"
+        in: "query"
+        description: "Identificador del empleado"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "query"
+        description: "Nombre del empleado"
+        required: true
+        type: "string"
+        collectionFormat: "multi"
+      responses:
+        "200":
+          schema:
+            $ref: "#/definitions/EmployeListResponse"
+          description: "Empleado registrado"
+        "400":
+          description: "Error get employe"
+  /employe/delete:
+    delete:
+      tags:
+      - "employe"
+      summary: "Eliminar un empleado mediante el id y su nombre"
+      operationId: "employeDelete"
+      parameters:
+      - name: "employeId"
+        in: "query"
+        description: "Identificador del empleado"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "query"
+        description: "Nombre del empleado"
+        required: true
+        type: "string"
+        collectionFormat: "multi"
+      responses:
+        "200":
+          description: "Employe was delete successfully"
+        "400":
+          description: "Error get employe"
+definitions:
+  TranslateBody:
+    type: "object"
+    required:
+    - "url_endpoint"
+    properties:
+      url_endpoint:
+        type: "string"
+        example: "https://swapi.py4e.com/api/planets/1"
+  TranslateResponse:
+    type: "object"
+    properties:
+      nombre:
+        type: "string"
+        example: "Tatooine"
+      período_de_rotación:
+        type: "string"
+        example: "23"
+      período_orbital:
+        type: "string"
+        example: "304"
+      diámetro:
+        type: "string"
+        example: "10465"
+      clima:
+        type: "string"
+        example: "arid"
+      gravedad:
+        type: "string"
+        example: "1 standard"
+      terreno:
+        type: "string"
+        example: "desert"
+      aguas_superficiales:
+        type: "string"
+        example: "1"
+  EmployeInsertBody:
+    type: "object"
+    required:
+    - "employeId"
+    - "name"
+    - "lastName"
+    - "documentNumber"
+    - "address"
+    - "email"
+    - "age"
+    properties:
+      employeId:
+        type: "string"
+        example: "U19201985"
+      name:
+        type: "string"
+        example: "Jhon"
+      lastName:
+        type: "string"
+        example: "Rupailla"
+      documentNumber:
+        type: "string"
+        example: "78625149"
+      address:
+        type: "string"
+        example: "Av. Perú"
+      email:
+        type: "string"
+        example: "jrupailla@gmail.com"
+      age:
+        type: "integer"
+        example: 24
+  EmployeListResponse:
+    type: "object"
+    properties:
+      employeId:
+        type: "string"
+        example: "U19201985"
+      name:
+        type: "string"
+        example: "Jhon"
+      lastName:
+        type: "string"
+        example: "Rupailla"
+      documentNumber:
+        type: "string"
+        example: "78625149"
+      address:
+        type: "string"
+        example: "Av. Perú"
+      email:
+        type: "string"
+        example: "jrupailla@gmail.com"
+      age:
+        type: "integer"
+        example: 24

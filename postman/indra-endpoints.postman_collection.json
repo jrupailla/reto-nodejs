@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "f65fecca-9514-43f1-8dba-983d14f8d280",
+		"name": "indra-endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "translate_endpoint",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url_endpoint\": \"https://swapi.py4e.com/api/planets/1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4060/dev/translate/endpoint",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4060",
+					"path": [
+						"dev",
+						"translate",
+						"endpoint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employe_insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employeId\": \"U19201985\",\r\n    \"name\": \"Jhon\",\r\n    \"lastName\": \"Rupailla\",\r\n    \"documentNumber\": \"75263452\",\r\n    \"address\": \"Av. Perú\",\r\n    \"email\": \"jrupailla@gmail.com\",\r\n    \"age\": 24\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4060/dev/employe/insert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4060",
+					"path": [
+						"dev",
+						"employe",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employe_update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employeId\": \"U19201985\",\r\n    \"name\": \"Jhon\",\r\n    \"lastName\": \"Rupailla\",\r\n    \"documentNumber\": \"75263452\",\r\n    \"address\": \"Av. Perú\",\r\n    \"email\": \"jrupailla@gmail.com\",\r\n    \"age\": 24\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4060/dev/employe/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4060",
+					"path": [
+						"dev",
+						"employe",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employe_get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4060/dev/employe/get?employeId=U19201985&name=Jhon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4060",
+					"path": [
+						"dev",
+						"employe",
+						"get"
+					],
+					"query": [
+						{
+							"key": "employeId",
+							"value": "U19201985"
+						},
+						{
+							"key": "name",
+							"value": "Jhon"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employe_delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4060/dev/employe/delete?employeId=U19201983&name=Jhon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4060",
+					"path": [
+						"dev",
+						"employe",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "employeId",
+							"value": "U19201983"
+						},
+						{
+							"key": "name",
+							"value": "Jhon"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employe_list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4060/dev/employe/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4060",
+					"path": [
+						"dev",
+						"employe",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

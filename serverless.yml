@@ -1,0 +1,73 @@
+service: aws-indra-service
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  stage: dev
+  profile: sls-indra
+
+custom:
+  serverless-offline:
+    httpPort: 4060
+
+functions:
+  translate_endpoint:
+    handler: handler/translateHandler.translate_endpoint
+    events:
+      - http:
+          path: translate/endpoint
+          method: post
+  list_employe:
+    handler: handler/employeHandler.list_employe
+    events:
+      - http:
+          path: employe/list
+          method: get
+  get_employe:
+    handler: handler/employeHandler.get_employe
+    events:
+      - http:
+          path: employe/get
+          method: get
+  insert_employe:
+    handler: handler/employeHandler.insert_employe
+    events:
+      - http:
+          path: employe/insert
+          method: post
+  update_employe:
+    handler: handler/employeHandler.update_employe
+    events:
+      - http:
+          path: employe/update
+          method: put
+  remove_employe:
+    handler: handler/employeHandler.remove_employe
+    events:
+      - http:
+          path: employe/delete
+          method: delete
+
+resources:
+  Resources:
+    EmployeTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: EmployeTable
+        AttributeDefinitions:
+          - AttributeName: employeId
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: employeId
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+plugins:
+  - serverless-offline
